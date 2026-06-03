@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trinh Vo — Directeur de Projet IT</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a2e;
+    --mid: #4a4a6a;
+    --light: #8888aa;
+    --accent: #c8a96e;
+    --accent2: #e8d5b0;
+    --bg: #f7f5f0;
+    --white: #ffffff;
+    --card: #fefcf8;
+    --border: #e2ddd4;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--ink);
+    color: var(--white);
+    padding: 60px 40px 50px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(200,169,110,0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: 30px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(200,169,110,0.10) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-inner {
+    max-width: 960px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(48px, 10vw, 88px);
+    font-weight: 300;
+    letter-spacing: 0.04em;
+    line-height: 1;
+    color: var(--white);
+  }
+
+  .hero-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: clamp(11px, 2vw, 13px);
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-top: 4px;
+  }
+
+  .hero-divider {
+    width: 50px;
+    height: 1px;
+    background: var(--accent);
+    margin: 6px 0;
+  }
+
+  .hero-summary {
+    font-size: 14.5px;
+    color: rgba(255,255,255,0.72);
+    max-width: 580px;
+    line-height: 1.75;
+    font-weight: 300;
+  }
+
+  .hero-contacts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    margin-top: 6px;
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .contact-item:hover { color: var(--accent); }
+
+  .contact-item svg {
+    width: 14px; height: 14px;
+    flex-shrink: 0;
+    opacity: 0.7;
+  }
+
+  /* ── LAYOUT ── */
+  .main-wrap {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 40px 20px 60px;
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 40px;
+    align-items: start;
+  }
+
+  /* ── SECTION LABELS ── */
+  .section-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ── EXPERIENCE ── */
+  .experience-list { display: flex; flex-direction: column; gap: 32px; }
+
+  .exp-item {
+    position: relative;
+    padding-left: 20px;
+    border-left: 2px solid var(--border);
+    transition: border-color 0.3s;
+  }
+
+  .exp-item:hover { border-color: var(--accent); }
+
+  .exp-item::before {
+    content: '';
+    position: absolute;
+    left: -5px; top: 6px;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 2px solid var(--border);
+    transition: border-color 0.3s, background 0.3s;
+  }
+
+  .exp-item:hover::before {
+    border-color: var(--accent);
+    background: var(--accent);
+  }
+
+  .exp-dates {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--light);
+    margin-bottom: 4px;
+  }
+
+  .exp-company {
+    font-size: 12px;
+    color: var(--mid);
+    margin-bottom: 2px;
+  }
+
+  .exp-role {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 10px;
+    line-height: 1.2;
+  }
+
+  .exp-sub {
+    font-size: 11.5px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 10px 0 6px;
+  }
+
+  .exp-tasks {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .exp-tasks li {
+    font-size: 13.5px;
+    color: var(--mid);
+    padding-left: 14px;
+    position: relative;
+    line-height: 1.5;
+  }
+
+  .exp-tasks li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 11px;
+    top: 2px;
+  }
+
+  /* ── SIDEBAR ── */
+  .sidebar { display: flex; flex-direction: column; gap: 30px; }
+
+  .sidebar-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 22px 20px;
+  }
+
+  /* ── SKILLS ── */
+  .skill-list { display: flex; flex-direction: column; gap: 10px; }
+
+  .skill-item { display: flex; flex-direction: column; gap: 4px; }
+
+  .skill-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink);
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .skill-bar {
+    height: 3px;
+    background: var(--border);
+    border-radius: 99px;
+    overflow: hidden;
+  }
+
+  .skill-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    border-radius: 99px;
+    animation: fillBar 1.2s cubic-bezier(0.4,0,0.2,1) both;
+  }
+
+  @keyframes fillBar {
+    from { width: 0 !important; }
+  }
+
+  /* ── TAG PILLS ── */
+  .tag-cloud { display: flex; flex-wrap: wrap; gap: 8px; }
+
+  .tag {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--mid);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 4px 10px;
+    transition: all 0.2s;
+  }
+
+  .tag:hover {
+    background: var(--accent);
+    color: var(--white);
+    border-color: var(--accent);
+  }
+
+  /* ── EDUCATION ── */
+  .edu-item { margin-bottom: 18px; }
+  .edu-item:last-child { margin-bottom: 0; }
+
+  .edu-year {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 2px;
+  }
+
+  .edu-school {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 3px;
+  }
+
+  .edu-degree {
+    font-size: 13px;
+    color: var(--mid);
+    line-height: 1.4;
+  }
+
+  /* ── LANGUAGES ── */
+  .lang-list { display: flex; flex-direction: column; gap: 10px; }
+
+  .lang-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .lang-name { font-size: 13.5px; font-weight: 500; color: var(--ink); }
+
+  .lang-level {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--light);
+  }
+
+  .lang-dots { display: flex; gap: 4px; margin-top: 4px; }
+
+  .dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--border);
+  }
+
+  .dot.filled { background: var(--accent); }
+
+  /* ── SOFT SKILLS ── */
+  .soft-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .soft-item {
+    font-size: 12.5px;
+    color: var(--mid);
+    background: var(--bg);
+    border-radius: 6px;
+    padding: 8px 10px;
+    text-align: center;
+    border: 1px solid var(--border);
+    transition: all 0.2s;
+  }
+
+  .soft-item:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  /* ── CERT BADGE ── */
+  .cert-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: linear-gradient(135deg, var(--accent) 0%, #b8916a 100%);
+    color: var(--white);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 4px;
+    margin-top: 10px;
+  }
+
+  /* ── ANIMATIONS ── */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(18px);
+    animation: fadeUp 0.6s ease forwards;
+  }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-inner > * { opacity: 0; animation: fadeUp 0.7s ease forwards; }
+  .hero-inner > *:nth-child(1) { animation-delay: 0.05s; }
+  .hero-inner > *:nth-child(2) { animation-delay: 0.15s; }
+  .hero-inner > *:nth-child(3) { animation-delay: 0.22s; }
+  .hero-inner > *:nth-child(4) { animation-delay: 0.30s; }
+  .hero-inner > *:nth-child(5) { animation-delay: 0.38s; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 720px) {
+    .hero { padding: 44px 22px 40px; }
+    .main-wrap {
+      grid-template-columns: 1fr;
+      padding: 28px 18px 50px;
+      gap: 32px;
+    }
+    .sidebar { order: -1; }
+    .soft-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 420px) {
+    .hero-contacts { gap: 12px; }
+    .contact-item { font-size: 12px; }
+  }
+
+  /* ── PUBLICATIONS ── */
+  .publications-section {
+    max-width: 960px;
+    margin: 0 auto 60px;
+    padding: 0 20px;
+  }
+
+  .pub-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 18px;
+  }
+
+  .pub-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: all 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .pub-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--border);
+    transition: background 0.25s;
+  }
+
+  .pub-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(26,26,46,0.08);
+  }
+
+  .pub-card:hover::before { background: var(--accent); }
+
+  .pub-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .pub-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+
+  .pub-excerpt {
+    font-size: 12.5px;
+    color: var(--mid);
+    line-height: 1.55;
+    flex: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .pub-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 4px;
+  }
+
+  .pub-date {
+    font-size: 11px;
+    color: var(--light);
+    font-weight: 500;
+  }
+
+  .pub-arrow {
+    font-size: 13px;
+    color: var(--accent);
+    opacity: 0;
+    transform: translateX(-4px);
+    transition: all 0.2s;
+  }
+
+  .pub-card:hover .pub-arrow {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .pub-blog-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--mid);
+    text-decoration: none;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 9px 16px;
+    transition: all 0.2s;
+    background: var(--card);
+  }
+
+  .pub-blog-link:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  /* ── PRINT ── */
+  @media print {
+    .hero { background: var(--ink) !important; -webkit-print-color-adjust: exact; }
+    .skill-fill { animation: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── HERO ── -->
+<header class="hero">
+  <div class="hero-inner">
+    <div>
+      <h1 class="hero-name">Trinh Vo</h1>
+      <p class="hero-title">Directeur de Projet IT &nbsp;·&nbsp; +20 ans d'expérience</p>
+    </div>
+    <div class="hero-divider"></div>
+    <p class="hero-summary">
+      Senior IT Project Director intervenu au sein de groupes internationaux dans les secteurs pharmaceutique, télécom et transports. Expert du triptyque qualité-coût-délai, animateur de comités de pilotage et soutien quotidien des équipes techniques et opérationnelles.
+    </p>
+    <nav class="hero-contacts">
+      <a href="tel:+33620323613" class="contact-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013 5.18 2 2 0 015 3h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L9.09 10.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 17.92z"/></svg>
+        +33 6 20 32 36 13
+      </a>
+      <a href="mailto:trinh.vo@hotmail.fr" class="contact-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
+        trinh.vo@hotmail.fr
+      </a>
+      <span class="contact-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Thoissey (01)
+      </span>
+      <a href="#" class="contact-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        Profil LinkedIn
+      </a>
+    </nav>
+  </div>
+</header>
+
+<!-- ── BODY ── -->
+<div class="main-wrap">
+
+  <!-- ── LEFT COLUMN : EXPERIENCES ── -->
+  <main>
+    <p class="section-label">Expériences professionnelles</p>
+
+    <div class="experience-list">
+
+      <!-- KEOLIS -->
+      <div class="exp-item fade-in" style="animation-delay:0.1s">
+        <p class="exp-dates">Fév. 2024 — Présent</p>
+        <p class="exp-company">KEOLIS Lyon &nbsp;·&nbsp; via Piman Group</p>
+        <h2 class="exp-role">Responsable de Programme IT</h2>
+        <ul class="exp-tasks">
+          <li>Mise en place des prérequis avant déploiement (réunions go/no go, rédaction de chronogrammes)</li>
+          <li>Validation des livrables techniques et fonctionnels</li>
+          <li>Mise en place des périodes d'ultra surveillance</li>
+          <li>Déploiement des nouveaux postes de travail</li>
+          <li>Cadrage et analyse (technique & fonctionnel) pour la mise en place du nouveau portail conducteur</li>
+        </ul>
+      </div>
+
+      <!-- APAVE -->
+      <div class="exp-item fade-in" style="animation-delay:0.2s">
+        <p class="exp-dates">Fév. 2021 — Sept. 2023</p>
+        <p class="exp-company">APAVE Groupe &nbsp;·&nbsp; via AMARIS Consulting</p>
+        <h2 class="exp-role">Chef de Projet IT Senior</h2>
+        <ul class="exp-tasks">
+          <li>Responsable des développements d'une application cœur de métier</li>
+          <li>Priorisation des développements, tests de qualifications et de recette</li>
+          <li>Déploiement du client lourd (2 000 postes cible)</li>
+          <li>Participation aux comités de pilotage — suivi budgétaire, planning et jalons</li>
+          <li>Validation des livrables techniques et fonctionnels</li>
+        </ul>
+      </div>
+
+      <!-- SANOFI -->
+      <div class="exp-item fade-in" style="animation-delay:0.3s">
+        <p class="exp-dates">Fév. 2020 — Déc. 2020</p>
+        <p class="exp-company">SANOFI PASTEUR &nbsp;·&nbsp; via AMARIS Consulting</p>
+        <h2 class="exp-role">Chef de Projet IT Senior</h2>
+        <p class="exp-sub">Internal Video Channel</p>
+        <ul class="exp-tasks">
+          <li>Rédaction des livrables techniques (plan projet, user requirement, spécifications fonctionnelles, stratégie de test, modèle de support applicatif, guide d'utilisation)</li>
+          <li>Animation d'un réseau de key users — Proof of Concept — Reporting</li>
+        </ul>
+        <p class="exp-sub">Advanced Search Engine</p>
+        <ul class="exp-tasks">
+          <li>Rédaction des livrables techniques complets</li>
+          <li>Animation de key users, proof of concept et reporting</li>
+        </ul>
+      </div>
+
+      <!-- bioMÉRIEUX -->
+      <div class="exp-item fade-in" style="animation-delay:0.35s">
+        <p class="exp-dates">Sept. 2019 — Déc. 2019</p>
+        <p class="exp-company">Laboratoires bioMérieux &nbsp;·&nbsp; via AMARIS Consulting</p>
+        <h2 class="exp-role">Chef de Projet IT Senior</h2>
+        <ul class="exp-tasks">
+          <li>Animation d'un réseau de key users</li>
+          <li>Définition de la matrice SWOT &amp; roadmap digital 2024</li>
+          <li>Plan de communication interne</li>
+          <li>Refonte de l'intranet dédié au plan stratégique 2020</li>
+          <li>Organisation Hackathon &amp; conférences live broadcast (format TEDx)</li>
+        </ul>
+      </div>
+
+      <!-- LOUIS DREYFUS Change -->
+      <div class="exp-item fade-in" style="animation-delay:0.40s">
+        <p class="exp-dates">Nov. 2018 — Sept. 2019</p>
+        <p class="exp-company">Louis Dreyfus Co &nbsp;·&nbsp; via AMARIS Consulting</p>
+        <h2 class="exp-role">Change Manager Senior</h2>
+        <ul class="exp-tasks">
+          <li>Identification d'un sponsor top management</li>
+          <li>Accompagnement des utilisateurs dans les changements fondamentaux</li>
+          <li>Mise en place des supports de formation &amp; stratégie de communication</li>
+          <li>Déploiement d'un réseau local d'ambassadeurs</li>
+        </ul>
+      </div>
+
+      <!-- LOUIS DREYFUS QA -->
+      <div class="exp-item fade-in" style="animation-delay:0.45s">
+        <p class="exp-dates">Jan. 2018 — Juil. 2018</p>
+        <p class="exp-company">Louis Dreyfus Co &nbsp;·&nbsp; via AMARIS Consulting</p>
+        <h2 class="exp-role">Quality Assurance Manager Senior</h2>
+        <ul class="exp-tasks">
+          <li>Gestion du planning de déploiement</li>
+          <li>Coordination des tests : acceptance, non-régression, performance</li>
+        </ul>
+      </div>
+
+      <!-- ORANGE -->
+      <div class="exp-item fade-in" style="animation-delay:0.50s">
+        <p class="exp-dates">Mars 2010 — Déc. 2017</p>
+        <p class="exp-company">Orange S.A. &nbsp;·&nbsp; Freelance (7 ans)</p>
+        <h2 class="exp-role">Chef de Projet IT Senior</h2>
+        <p class="exp-sub">Gestion de l'intranet du Groupe</p>
+        <ul class="exp-tasks">
+          <li>Refontes complètes en 2013 et 2016 — tests techniques et fonctionnels</li>
+          <li>Publications, webmastering &amp; mise en place d'une chaîne de soutien</li>
+          <li>Déploiement mondial</li>
+        </ul>
+        <p class="exp-sub">Communication de crise</p>
+        <ul class="exp-tasks">
+          <li>Communication officielle du PDG Stéphane Richard (crise sociale 2010, attentats de Paris)</li>
+        </ul>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ── RIGHT COLUMN : SIDEBAR ── -->
+  <aside class="sidebar">
+
+    <!-- COMPÉTENCES -->
+    <div class="sidebar-card fade-in" style="animation-delay:0.15s">
+      <p class="section-label">Compétences</p>
+      <div class="skill-list">
+        <div class="skill-item">
+          <span class="skill-name">Management de projet</span>
+          <div class="skill-bar"><div class="skill-fill" style="width:96%"></div></div>
+        </div>
+        <div class="skill-item">
+          <span class="skill-name">Gestion budgétaire</span>
+          <div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div>
+        </div>
+        <div class="skill-item">
+          <span class="skill-name">Gestion de planning</span>
+          <div class="skill-bar"><div class="skill-fill" style="width:92%"></div></div>
+        </div>
+        <div class="skill-item">
+          <span class="skill-name">Conduite du changement</span>
+          <div class="skill-bar"><div class="skill-fill" style="width:88%"></div></div>
+        </div>
+        <div class="skill-item">
+          <span class="skill-name">Communication</span>
+          <div class="skill-bar"><div class="skill-fill" style="width:94%"></div></div>
+        </div>
+        <div class="skill-item">
+          <span class="skill-name">Recrutement</span>
+          <div class="skill-bar"><div class="skill-fill" style="width:82%"></div></div>
+        </div>
+      </div>
+      <span class="cert-badge">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+        PRINCE2 Certifié
+      </span>
+    </div>
+
+    <!-- FORMATION -->
+    <div class="sidebar-card fade-in" style="animation-delay:0.25s">
+      <p class="section-label">Formation</p>
+      <div class="edu-item">
+        <p class="edu-year">2025 – 2026</p>
+        <p class="edu-school">Université de Franche-Comté</p>
+        <p class="edu-degree">Préparation Doctorat<br>Master 2 Histoire <em>(mention très bien)</em></p>
+      </div>
+      <div class="edu-item">
+        <p class="edu-year">1999</p>
+        <p class="edu-school">Université Paris XII</p>
+        <p class="edu-degree">Master 2 Économie &amp; Gestion</p>
+      </div>
+    </div>
+
+    <!-- LANGUES -->
+    <div class="sidebar-card fade-in" style="animation-delay:0.30s">
+      <p class="section-label">Langues</p>
+      <div class="lang-list">
+        <div>
+          <div class="lang-item">
+            <span class="lang-name">Français</span>
+            <span class="lang-level">Natif</span>
+          </div>
+          <div class="lang-dots">
+            <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div>
+          </div>
+        </div>
+        <div>
+          <div class="lang-item">
+            <span class="lang-name">Vietnamien</span>
+            <span class="lang-level">Natif</span>
+          </div>
+          <div class="lang-dots">
+            <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div>
+          </div>
+        </div>
+        <div>
+          <div class="lang-item">
+            <span class="lang-name">Anglais</span>
+            <span class="lang-level">C1+</span>
+          </div>
+          <div class="lang-dots">
+            <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SOFT SKILLS -->
+    <div class="sidebar-card fade-in" style="animation-delay:0.35s">
+      <p class="section-label">Soft Skills</p>
+      <div class="soft-grid">
+        <div class="soft-item">Gestion du stress</div>
+        <div class="soft-item">Bienveillance</div>
+        <div class="soft-item">Confiance en soi</div>
+        <div class="soft-item">Aisance relationnelle</div>
+      </div>
+    </div>
+
+    <!-- SECTEURS -->
+    <div class="sidebar-card fade-in" style="animation-delay:0.40s">
+      <p class="section-label">Secteurs</p>
+      <div class="tag-cloud">
+        <span class="tag">Transports</span>
+        <span class="tag">Pharmaceutique</span>
+        <span class="tag">Télécom</span>
+        <span class="tag">Commodities</span>
+        <span class="tag">Inspection / BTP</span>
+        <span class="tag">Diagnostic médical</span>
+      </div>
+    </div>
+
+  </aside>
+</div>
+
+<!-- ── PUBLICATIONS ── -->
+<section class="publications-section">
+  <p class="section-label" style="max-width:960px;margin:0 auto 24px;">Publications &amp; Textes — <span style="font-weight:300;text-transform:none;letter-spacing:0;font-size:11px;color:var(--light)">Blog de recherche historique (M2)</span></p>
+
+  <div class="pub-grid">
+
+    <a href="https://sombral.blogspot.com/2026/05/le-code-noir-et-lhypocrisie-de.html" target="_blank" class="pub-card fade-in" style="animation-delay:0.1s">
+      <span class="pub-label">[M2] Histoire · Mai 2026</span>
+      <h3 class="pub-title">Le Code noir et l'hypocrisie de l'absolutisme religieux</h3>
+      <p class="pub-excerpt">Réflexion sur l'édit de 1685, ses contradictions entre foi catholique et commerce triangulaire, à l'occasion de l'abrogation du Code noir en mai 2026.</p>
+      <div class="pub-footer">
+        <span class="pub-date">29 mai 2026</span>
+        <span class="pub-arrow">→</span>
+      </div>
+    </a>
+
+    <a href="https://sombral.blogspot.com/2026/05/empereur-constantin-et-sa-conversion-au.html" target="_blank" class="pub-card fade-in" style="animation-delay:0.15s">
+      <span class="pub-label">[M2] Histoire · Mai 2026</span>
+      <h3 class="pub-title">Empereur Constantin et sa conversion au catholicisme romain</h3>
+      <p class="pub-excerpt">La bataille du pont Milvius en 312 ap. J.-C. et l'histoire de la célèbre vision de Constantin — croix enflammée, victoire sur Maxence et naissance de l'alliance entre pouvoir impérial et christianisme.</p>
+      <div class="pub-footer">
+        <span class="pub-date">22 mai 2026</span>
+        <span class="pub-arrow">→</span>
+      </div>
+    </a>
+
+    <a href="https://sombral.blogspot.com/2026/03/quelle-fonction-avaient-les-demons-dans.html" target="_blank" class="pub-card fade-in" style="animation-delay:0.2s">
+      <span class="pub-label">[M2] Histoire · Mars 2026</span>
+      <h3 class="pub-title">Quelle fonction avaient les démons dans l'Antiquité ?</h3>
+      <p class="pub-excerpt">Comment la transition du polythéisme au christianisme a modifié l'image, la perception et la fonction des démons — de médiateurs entre le divin et l'humain à esprits maléfiques associés à la tentation.</p>
+      <div class="pub-footer">
+        <span class="pub-date">12 mars 2026</span>
+        <span class="pub-arrow">→</span>
+      </div>
+    </a>
+
+    <a href="https://sombral.blogspot.com/2025/12/christopher-nolan-et-la-verite.html" target="_blank" class="pub-card fade-in" style="animation-delay:0.25s">
+      <span class="pub-label">[M2] Histoire · Déc. 2025</span>
+      <h3 class="pub-title">Christopher Nolan et la vérité typologique des anachronismes</h3>
+      <p class="pub-excerpt">Les casques corinthiens dans <em>The Odyssey</em> : pourquoi un anachronisme délibéré peut être pédagogiquement justifiable pour transmettre des structures mentales authentiques d'une époque.</p>
+      <div class="pub-footer">
+        <span class="pub-date">27 déc. 2025</span>
+        <span class="pub-arrow">→</span>
+      </div>
+    </a>
+
+    <a href="https://sombral.blogspot.com/2025/11/jeanne-darc-et-les-bourguignons.html" target="_blank" class="pub-card fade-in" style="animation-delay:0.3s">
+      <span class="pub-label">[M2] Histoire · Nov. 2025</span>
+      <h3 class="pub-title">Jeanne d'Arc et les Bourguignons</h3>
+      <p class="pub-excerpt">La relation tendue entre Jeanne d'Arc et Philippe le Bon dans le contexte de la quasi guerre civile au sein de la guerre de Cent Ans — trahison, capture à Compiègne et traité d'Arras.</p>
+      <div class="pub-footer">
+        <span class="pub-date">22 nov. 2025</span>
+        <span class="pub-arrow">→</span>
+      </div>
+    </a>
+
+    <a href="https://sombral.blogspot.com/2025/10/et-si-les-bourguignons-avaient-choisi.html" target="_blank" class="pub-card fade-in" style="animation-delay:0.35s">
+      <span class="pub-label">[M2] Histoire · Oct. 2025</span>
+      <h3 class="pub-title">Et si les Bourguignons avaient choisi la fidélité au roi ?</h3>
+      <p class="pub-excerpt">À l'occasion du 610e anniversaire d'Azincourt : analyse contrefactuelle de l'abstention délibérée des Bourguignons en 1415 et de ses conséquences sur le destin de la France.</p>
+      <div class="pub-footer">
+        <span class="pub-date">29 oct. 2025</span>
+        <span class="pub-arrow">→</span>
+      </div>
+    </a>
+
+    <a href="https://sombral.blogspot.com/2025/01/la-perception-des-frontieres-des-etats.html" target="_blank" class="pub-card fade-in" style="animation-delay:0.40s">
+      <span class="pub-label">[M2] Histoire · Jan. 2025</span>
+      <h3 class="pub-title">La perception des frontières des états bourguignons au Moyen Âge</h3>
+      <p class="pub-excerpt">Analyse du chapitre d'Élodie Lecuppre-Desjardin sur la vision lignagère de l'espace chez les quatre ducs de Bourgogne, entre titres féodaux et frontières cartographiques fluctuantes.</p>
+      <div class="pub-footer">
+        <span class="pub-date">9 jan. 2025</span>
+        <span class="pub-arrow">→</span>
+      </div>
+    </a>
+
+    <a href="https://sombral.blogspot.com/2024/12/comment-une-uvre-un-dessin-anime-par-ex.html" target="_blank" class="pub-card fade-in" style="animation-delay:0.45s">
+      <span class="pub-label">[M2] Histoire · Déc. 2024</span>
+      <h3 class="pub-title">Comment une œuvre traite un sujet d'histoire contemporaine ?</h3>
+      <p class="pub-excerpt">Analyse du <em>Tombeau des Lucioles</em> d'Isao Takahata (Studio Ghibli) : les bombardements américains sur le Japon de 1945, le devoir de mémoire et les choix narratifs du dessin animé historique.</p>
+      <div class="pub-footer">
+        <span class="pub-date">19 déc. 2024</span>
+        <span class="pub-arrow">→</span>
+      </div>
+    </a>
+
+    <a href="https://sombral.blogspot.com/2024/12/le-monument-de-lindifference-la.html" target="_blank" class="pub-card fade-in" style="animation-delay:0.50s">
+      <span class="pub-label">[M2] Histoire · Déc. 2024</span>
+      <h3 class="pub-title">Le monument, de l'indifférence à la surprotection ?</h3>
+      <p class="pub-excerpt">Évolution historique de la notion de patrimoine en France — du culte des reliques médiévales aux destructions révolutionnaires, jusqu'à la politisation contemporaine illustrée par Notre-Dame de Paris.</p>
+      <div class="pub-footer">
+        <span class="pub-date">15 déc. 2024</span>
+        <span class="pub-arrow">→</span>
+      </div>
+    </a>
+
+    <a href="https://sombral.blogspot.com/2024/10/levolution-des-tensions-entre-individu.html" target="_blank" class="pub-card fade-in" style="animation-delay:0.55s">
+      <span class="pub-label">[M1] Histoire · Oct. 2024</span>
+      <h3 class="pub-title">L'évolution des tensions entre individu et groupe dans les stèles funéraires grecques</h3>
+      <p class="pub-excerpt">Entre le Ve et le IIIe av. J.-C., comment le passage de la démocratie athénienne à l'hégémonie macédonienne a transformé la représentation du défunt — de l'anonymat civique au retour de l'individualité héroïque.</p>
+      <div class="pub-footer">
+        <span class="pub-date">16 oct. 2024</span>
+        <span class="pub-arrow">→</span>
+      </div>
+    </a>
+
+  </div>
+
+  <a href="https://sombral.blogspot.com/" target="_blank" class="pub-blog-link">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+    Voir tous les articles sur sombral.blogspot.com
+  </a>
+</section>
+
+</body>
+</html>
