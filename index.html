@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -332,6 +333,77 @@
     line-height: 1.4;
   }
 
+  .edu-thesis {
+    font-size: 11.5px;
+    color: var(--light);
+    font-style: italic;
+    line-height: 1.5;
+    margin-top: 5px;
+    padding-left: 8px;
+    border-left: 2px solid var(--accent2);
+  }
+
+  /* ── FEATURED PUB CARD ── */
+  .pub-card-featured {
+    grid-column: 1 / -1;
+    background: linear-gradient(135deg, var(--ink) 0%, #2a2a4a 100%);
+    border: none;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 26px 24px;
+  }
+
+  .pub-card-featured h3,
+  .pub-card-featured p,
+  .pub-card-featured span:not(.pub-featured-badge):not(.pub-arrow) {
+    color: #ffffff !important;
+  }
+
+  .pub-card-featured::before {
+    background: var(--accent);
+  }
+
+  .pub-card-featured:hover {
+    border-color: transparent;
+    box-shadow: 0 12px 36px rgba(26,26,46,0.22);
+  }
+
+  .pub-card-featured .pub-label {
+    color: var(--accent);
+  }
+
+  .pub-card-featured .pub-title {
+    color: #ffffff !important;
+    font-size: 20px;
+  }
+
+  .pub-card-featured .pub-excerpt {
+    color: rgba(255,255,255,0.80);
+    -webkit-line-clamp: 6;
+    font-size: 13.5px;
+  }
+
+  .pub-card-featured .pub-date { color: rgba(255,255,255,0.45); }
+
+  .pub-card-featured .pub-arrow { color: var(--accent); }
+
+  .pub-featured-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--accent);
+    color: var(--white);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 4px;
+    width: fit-content;
+  }
+
   /* ── LANGUAGES ── */
   .lang-list { display: flex; flex-direction: column; gap: 10px; }
 
@@ -560,6 +632,17 @@
     .skill-fill { animation: none !important; }
   }
 </style>
+<style>
+  .pub-card.pub-card-featured,
+  .pub-card.pub-card-featured h3.pub-title,
+  .pub-card.pub-card-featured p.pub-excerpt,
+  .pub-card.pub-card-featured .pub-date {
+    color: #ffffff !important;
+  }
+  .pub-card.pub-card-featured .pub-label {
+    color: #c8a96e !important;
+  }
+</style>
 </head>
 <body>
 
@@ -568,11 +651,11 @@
   <div class="hero-inner">
     <div>
       <h1 class="hero-name">Trinh Vo</h1>
-      <p class="hero-title">Directeur de Projet IT &nbsp;·&nbsp; +10 ans d'expérience</p>
+      <p class="hero-title">Directeur de Projet IT &nbsp;·&nbsp; +20 ans d'expérience</p>
     </div>
     <div class="hero-divider"></div>
     <p class="hero-summary">
-      Directeur de projet IT intervenu au sein de groupes internationaux dans les secteurs pharmaceutique, télécom et transports. Expert du triptyque qualité-coût-délai, animateur de comités de pilotage et soutien quotidien des équipes techniques et opérationnelles.
+      Senior IT Project Director intervenu au sein de groupes internationaux dans les secteurs pharmaceutique, télécom et transports. Expert du triptyque qualité-coût-délai, animateur de comités de pilotage et soutien quotidien des équipes techniques et opérationnelles.
     </p>
     <nav class="hero-contacts">
       <a href="tel:+33620323613" class="contact-item">
@@ -587,7 +670,7 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
         Thoissey (01)
       </span>
-      <a href="http://www.linkedin.com/in/trinh-vo-55478515" target="_blank" class="contact-item">
+      <a href="#" class="contact-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
         Profil LinkedIn
       </a>
@@ -748,27 +831,23 @@
     <!-- FORMATION -->
     <div class="sidebar-card fade-in" style="animation-delay:0.25s">
       <p class="section-label">Formation</p>
-     
-     <div class="edu-item">
+      <div class="edu-item">
         <p class="edu-year">2026 – 2031</p>
         <p class="edu-school">École Doctorale Centre Lucien Febvre</p>
         <p class="edu-degree">Doctorant en histoire moderne</p>
-        <p class="edu-degree"><em>« L'idéal clérical au prisme des récits des voyageurs, des missionnaires et des pèlerins français en Asie : regards croisés et contre-modèles, au contact de l'altérité religieuse (XVIIe–XVIIIe siècle). »</em></p>
+        <p class="edu-thesis">&laquo;&nbsp;L'idéal clérical au prisme des récits des voyageurs, des missionnaires et des pèlerins français en Asie : regards croisés et contre-modèles, au contact de l'altérité religieuse (XVII<sup>e</sup>–XVIII<sup>e</sup> siècle).&nbsp;&raquo;</p>
       </div>
-      
       <div class="edu-item">
         <p class="edu-year">2025 – 2026</p>
         <p class="edu-school">Université de Franche-Comté</p>
         <p class="edu-degree">Master 2 Histoire <em>(mention très bien)</em></p>
-        <p class="edu-degree"><em>« La religion des Siamois perçue par les élites françaises de 1686 à la fin du XVIIIe. »</em></p>
+        <p class="edu-thesis">&laquo;&nbsp;La religion des Siamois perçue par les élites françaises de 1686 à la fin du XVIII<sup>e</sup>.&nbsp;&raquo;</p>
       </div>
-
-   <div class="edu-item">
+      <div class="edu-item">
         <p class="edu-year">1999</p>
         <p class="edu-school">Université Paris XII</p>
-        <p class="edu-degree">Master 2 Économie &amp; Gestion <em>(mention très bien)</em></p>
+        <p class="edu-degree">Master 2 Économie &amp; Gestion</p>
       </div>
-      
     </div>
 
     <!-- LANGUES -->
@@ -834,19 +913,19 @@
 
 <!-- ── PUBLICATIONS ── -->
 <section class="publications-section">
-  <p class="section-label" style="max-width:960px;margin:0 auto 24px;">Publications &amp; Textes — <span style="font-weight:300;text-transform:none;letter-spacing:0;font-size:11px;color:var(--light)">Blog de recherche historique (M2)</span></p>
+  <p class="section-label" style="max-width:960px;margin:0 auto 24px;">Publications &amp; Textes — <span style="font-weight:300;text-transform:none;letter-spacing:0;font-size:11px;color:var(--light)">Blog de recherche historique</span></p>
 
   <div class="pub-grid">
 
-<!-- ══ ENCART MÉMOIRE M2 — toujours en premier ══ -->
+    <!-- ══ ENCART MÉMOIRE M2 — toujours en premier ══ -->
     <a href="https://sombral.blogspot.com/2026/06/la-perception-du-bouddhisme-par-les.html" target="_blank" class="pub-card pub-card-featured fade-in" style="animation-delay:0.05s">
       <span class="pub-featured-badge">
         <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
         Mémoire de recherche M2 — Mention très bien
       </span>
       <font color="#c8a96e"><span class="pub-label">[M2] Histoire moderne · 24 juin 2026</span></font>
-      <h3 class="pub-title"><font color="#000000">La perception du bouddhisme par les élites françaises entre 1686 et la fin du XVIII<sup>e</sup></font></h3>
-      <p class="pub-excerpt"><font color="#000000">Ce mémoire de recherche en histoire moderne analyse comment les élites savantes et religieuses françaises, initialement portées par des ambitions diplomatiques et une volonté d'évangélisation sous Louis XIV, ont découvert au contact du Siam une tradition spirituelle radicalement sans Dieu. À travers les récits des ambassades de 1685 et 1687, les auteurs décrivent avec fascination mais aussi incompréhension la rigueur morale des moines bouddhistes — leur pauvreté absolue et leur discipline ascétique renvoyant un miroir dérangeant au clergé catholique français. La querelle des rites entre les Jésuites et les Missions Étrangères de Paris a paradoxalement permis une identification quasi-anthropologique des différences fondamentales entre les deux systèmes religieux. En démontrant qu'une société sans Dieu créateur pouvait être moralement rigoureuse, cette rencontre a fourni aux philosophes des Lumières — Voltaire, Diderot, Bayle — un argument décisif contre l'absolutisme confessionnel, posant les bases intellectuelles de la laïcité moderne.</font></p>
+      <h3 class="pub-title"><font color="#ffffff">La perception du bouddhisme par les élites françaises entre 1686 et la fin du XVIII<sup>e</sup></font></h3>
+      <p class="pub-excerpt"><font color="#ffffff">Ce mémoire de recherche en histoire moderne analyse comment les élites savantes et religieuses françaises, initialement portées par des ambitions diplomatiques et une volonté d'évangélisation sous Louis XIV, ont découvert au contact du Siam une tradition spirituelle radicalement sans Dieu. À travers les récits des ambassades de 1685 et 1687, les auteurs décrivent avec fascination mais aussi incompréhension la rigueur morale des moines bouddhistes — leur pauvreté absolue et leur discipline ascétique renvoyant un miroir dérangeant au clergé catholique français. La querelle des rites entre les Jésuites et les Missions Étrangères de Paris a paradoxalement permis une identification quasi-anthropologique des différences fondamentales entre les deux systèmes religieux. En démontrant qu'une société sans Dieu créateur pouvait être moralement rigoureuse, cette rencontre a fourni aux philosophes des Lumières — Voltaire, Diderot, Bayle — un argument décisif contre l'absolutisme confessionnel, posant les bases intellectuelles de la laïcité moderne.</font></p>
       <div class="pub-footer">
         <font color="rgba(255,255,255,0.5)"><span class="pub-date">24 juin 2026</span></font>
         <font color="#c8a96e"><span class="pub-arrow">→ Lire l'article complet</span></font>
@@ -875,12 +954,7 @@
       </div>
     </a>
 
-
-
-
-    
-
-    <a href="https://sombral.blogspot.com/2026/05/le-code-noir-et-lhypocrisie-de.html" target="_blank" class="pub-card fade-in" style="animation-delay:0.1s">
+    <a href="https://sombral.blogspot.com/2026/05/le-code-noir-et-lhypocrisie-de.html" target="_blank" class="pub-card fade-in" style="animation-delay:0.20s">
       <span class="pub-label">[M2] Histoire · Mai 2026</span>
       <h3 class="pub-title">Le Code noir et l'hypocrisie de l'absolutisme religieux</h3>
       <p class="pub-excerpt">Réflexion sur l'édit de 1685, ses contradictions entre foi catholique et commerce triangulaire, à l'occasion de l'abrogation du Code noir en mai 2026.</p>
@@ -890,7 +964,7 @@
       </div>
     </a>
 
-    <a href="https://sombral.blogspot.com/2026/05/empereur-constantin-et-sa-conversion-au.html" target="_blank" class="pub-card fade-in" style="animation-delay:0.15s">
+    <a href="https://sombral.blogspot.com/2026/05/empereur-constantin-et-sa-conversion-au.html" target="_blank" class="pub-card fade-in" style="animation-delay:0.25s">
       <span class="pub-label">[M2] Histoire · Mai 2026</span>
       <h3 class="pub-title">Empereur Constantin et sa conversion au catholicisme romain</h3>
       <p class="pub-excerpt">La bataille du pont Milvius en 312 ap. J.-C. et l'histoire de la célèbre vision de Constantin — croix enflammée, victoire sur Maxence et naissance de l'alliance entre pouvoir impérial et christianisme.</p>
@@ -900,7 +974,7 @@
       </div>
     </a>
 
-    <a href="https://sombral.blogspot.com/2026/03/quelle-fonction-avaient-les-demons-dans.html" target="_blank" class="pub-card fade-in" style="animation-delay:0.2s">
+    <a href="https://sombral.blogspot.com/2026/03/quelle-fonction-avaient-les-demons-dans.html" target="_blank" class="pub-card fade-in" style="animation-delay:0.30s">
       <span class="pub-label">[M2] Histoire · Mars 2026</span>
       <h3 class="pub-title">Quelle fonction avaient les démons dans l'Antiquité ?</h3>
       <p class="pub-excerpt">Comment la transition du polythéisme au christianisme a modifié l'image, la perception et la fonction des démons — de médiateurs entre le divin et l'humain à esprits maléfiques associés à la tentation.</p>
@@ -910,7 +984,7 @@
       </div>
     </a>
 
-    <a href="https://sombral.blogspot.com/2025/12/christopher-nolan-et-la-verite.html" target="_blank" class="pub-card fade-in" style="animation-delay:0.25s">
+    <a href="https://sombral.blogspot.com/2025/12/christopher-nolan-et-la-verite.html" target="_blank" class="pub-card fade-in" style="animation-delay:0.35s">
       <span class="pub-label">[M2] Histoire · Déc. 2025</span>
       <h3 class="pub-title">Christopher Nolan et la vérité typologique des anachronismes</h3>
       <p class="pub-excerpt">Les casques corinthiens dans <em>The Odyssey</em> : pourquoi un anachronisme délibéré peut être pédagogiquement justifiable pour transmettre des structures mentales authentiques d'une époque.</p>
@@ -920,7 +994,7 @@
       </div>
     </a>
 
-    <a href="https://sombral.blogspot.com/2025/11/jeanne-darc-et-les-bourguignons.html" target="_blank" class="pub-card fade-in" style="animation-delay:0.3s">
+    <a href="https://sombral.blogspot.com/2025/11/jeanne-darc-et-les-bourguignons.html" target="_blank" class="pub-card fade-in" style="animation-delay:0.40s">
       <span class="pub-label">[M2] Histoire · Nov. 2025</span>
       <h3 class="pub-title">Jeanne d'Arc et les Bourguignons</h3>
       <p class="pub-excerpt">La relation tendue entre Jeanne d'Arc et Philippe le Bon dans le contexte de la quasi guerre civile au sein de la guerre de Cent Ans — trahison, capture à Compiègne et traité d'Arras.</p>
@@ -930,7 +1004,7 @@
       </div>
     </a>
 
-    <a href="https://sombral.blogspot.com/2025/10/et-si-les-bourguignons-avaient-choisi.html" target="_blank" class="pub-card fade-in" style="animation-delay:0.35s">
+    <a href="https://sombral.blogspot.com/2025/10/et-si-les-bourguignons-avaient-choisi.html" target="_blank" class="pub-card fade-in" style="animation-delay:0.45s">
       <span class="pub-label">[M2] Histoire · Oct. 2025</span>
       <h3 class="pub-title">Et si les Bourguignons avaient choisi la fidélité au roi ?</h3>
       <p class="pub-excerpt">À l'occasion du 610e anniversaire d'Azincourt : analyse contrefactuelle de l'abstention délibérée des Bourguignons en 1415 et de ses conséquences sur le destin de la France.</p>
@@ -940,7 +1014,7 @@
       </div>
     </a>
 
-    <a href="https://sombral.blogspot.com/2025/01/la-perception-des-frontieres-des-etats.html" target="_blank" class="pub-card fade-in" style="animation-delay:0.40s">
+    <a href="https://sombral.blogspot.com/2025/01/la-perception-des-frontieres-des-etats.html" target="_blank" class="pub-card fade-in" style="animation-delay:0.50s">
       <span class="pub-label">[M2] Histoire · Jan. 2025</span>
       <h3 class="pub-title">La perception des frontières des états bourguignons au Moyen Âge</h3>
       <p class="pub-excerpt">Analyse du chapitre d'Élodie Lecuppre-Desjardin sur la vision lignagère de l'espace chez les quatre ducs de Bourgogne, entre titres féodaux et frontières cartographiques fluctuantes.</p>
@@ -950,7 +1024,7 @@
       </div>
     </a>
 
-    <a href="https://sombral.blogspot.com/2024/12/comment-une-uvre-un-dessin-anime-par-ex.html" target="_blank" class="pub-card fade-in" style="animation-delay:0.45s">
+    <a href="https://sombral.blogspot.com/2024/12/comment-une-uvre-un-dessin-anime-par-ex.html" target="_blank" class="pub-card fade-in" style="animation-delay:0.55s">
       <span class="pub-label">[M2] Histoire · Déc. 2024</span>
       <h3 class="pub-title">Comment une œuvre traite un sujet d'histoire contemporaine ?</h3>
       <p class="pub-excerpt">Analyse du <em>Tombeau des Lucioles</em> d'Isao Takahata (Studio Ghibli) : les bombardements américains sur le Japon de 1945, le devoir de mémoire et les choix narratifs du dessin animé historique.</p>
@@ -960,7 +1034,7 @@
       </div>
     </a>
 
-    <a href="https://sombral.blogspot.com/2024/12/le-monument-de-lindifference-la.html" target="_blank" class="pub-card fade-in" style="animation-delay:0.50s">
+    <a href="https://sombral.blogspot.com/2024/12/le-monument-de-lindifference-la.html" target="_blank" class="pub-card fade-in" style="animation-delay:0.60s">
       <span class="pub-label">[M2] Histoire · Déc. 2024</span>
       <h3 class="pub-title">Le monument, de l'indifférence à la surprotection ?</h3>
       <p class="pub-excerpt">Évolution historique de la notion de patrimoine en France — du culte des reliques médiévales aux destructions révolutionnaires, jusqu'à la politisation contemporaine illustrée par Notre-Dame de Paris.</p>
@@ -970,10 +1044,10 @@
       </div>
     </a>
 
-    <a href="https://sombral.blogspot.com/2024/10/levolution-des-tensions-entre-individu.html" target="_blank" class="pub-card fade-in" style="animation-delay:0.55s">
+    <a href="https://sombral.blogspot.com/2024/10/levolution-des-tensions-entre-individu.html" target="_blank" class="pub-card fade-in" style="animation-delay:0.65s">
       <span class="pub-label">[M1] Histoire · Oct. 2024</span>
       <h3 class="pub-title">L'évolution des tensions entre individu et groupe dans les stèles funéraires grecques</h3>
-      <p class="pub-excerpt">Entre le Ve et le IIIe av. J.-C., comment le passage de la démocratie athénienne à l'hégémonie macédonienne a transformé la représentation du défunt — de l'anonymat civique au retour de l'individualité héroïque.</p>
+      <p class="pub-excerpt">Entre le V<sup>e</sup> et le III<sup>e</sup> av. J.-C., comment le passage de la démocratie athénienne à l'hégémonie macédonienne a transformé la représentation du défunt — de l'anonymat civique au retour de l'individualité héroïque.</p>
       <div class="pub-footer">
         <span class="pub-date">16 oct. 2024</span>
         <span class="pub-arrow">→</span>
