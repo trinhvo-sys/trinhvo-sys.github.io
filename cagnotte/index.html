@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ma cagnotte de notes</title>
+<title>La cagnotte des moula du Manul</title>
 <style>
   :root {
     --bg: #fdf8f0; --card: #ffffff; --ink: #2b2a33; --muted: #6f6c7a;
@@ -112,11 +112,16 @@
   <section class="card rules">
     <h2>Règles</h2>
     <ul>
-      <li>Dès qu'une note dépasse 15/20, la cagnotte vaut au moins <strong>15 €</strong>.</li>
-      <li>Chaque point au-dessus de 15 ajoute <strong>1 €</strong>.</li>
-      <li>En <strong>mathématiques</strong> et en <strong>français</strong>, chaque point au-dessus de 15 vaut <strong>1,20 €</strong>.</li>
-      <li>Une note de 15 ou moins ne change rien.</li>
+      <li>Chaque note de <strong>15/20 ou plus</strong> ajoute <strong>15 €</strong> à la cagnotte.</li>
+      <li>Chaque point au-dessus de 15 ajoute <strong>1 €</strong> de plus (16/20 = 16 €, 18/20 = 18 €).</li>
+      <li>En <strong>mathématiques</strong> et en <strong>français</strong>, chaque point au-dessus de 15 vaut <strong>1,20 €</strong> (16/20 = 16,20 €).</li>
+      <li>Une note inférieure à 15 ne change rien.</li>
     </ul>
+    <table style="width:100%;border-collapse:collapse;margin-top:12px;text-align:center">
+      <tr style="border-bottom:1px solid var(--line)"><th style="text-align:left">Note</th><th>15</th><th>16</th><th>17</th><th>18</th><th>19</th><th>20</th></tr>
+      <tr style="border-bottom:1px solid var(--line)"><td style="text-align:left">Autres matières</td><td>15 €</td><td>16 €</td><td>17 €</td><td>18 €</td><td>19 €</td><td>20 €</td></tr>
+      <tr><td style="text-align:left">Maths / Français</td><td>15 €</td><td>16,20 €</td><td>17,40 €</td><td>18,60 €</td><td>19,80 €</td><td>21 €</td></tr>
+    </table>
   </section>
 </main>
 
@@ -130,17 +135,16 @@
 
   const fmt = n => n.toLocaleString("fr-FR", { style: "currency", currency: "EUR" });
 
+  // Une note >= 15 rapporte 15 € + 1 € par point au-dessus de 15 (1,20 € en maths/français)
   function gainPourNote(subject, grade) {
-    if (grade <= SEUIL) return 0;
+    if (grade < SEUIL) return 0;
     const taux = BONUS_MATIERES.includes(subject) ? TAUX_BONUS : TAUX_NORMAL;
-    return Math.round((grade - SEUIL) * taux * 100) / 100;
+    return Math.round((BASE + (grade - SEUIL) * taux) * 100) / 100;
   }
 
   function calculerCagnotte(notes) {
-    const qualifiantes = notes.filter(n => n.grade > SEUIL);
-    if (qualifiantes.length === 0) return 0;
-    const bonus = qualifiantes.reduce((s, n) => s + gainPourNote(n.subject, n.grade), 0);
-    return Math.round((BASE + bonus) * 100) / 100;
+    const total = notes.reduce((s, n) => s + gainPourNote(n.subject, n.grade), 0);
+    return Math.round(total * 100) / 100;
   }
 
   let notes = [];
@@ -152,10 +156,10 @@
   function render() {
     const total = calculerCagnotte(notes);
     $("amount").textContent = fmt(total);
-    const nb = notes.filter(n => n.grade > SEUIL).length;
+    const nb = notes.filter(n => n.grade >= SEUIL).length;
     $("sub").textContent = nb === 0
-      ? "Aucune note au-dessus de 15 pour l'instant"
-      : `${nb} note${nb > 1 ? "s" : ""} au-dessus de 15 · base ${fmt(BASE)} + ${fmt(total - BASE)} de bonus`;
+      ? "Aucune note de 15 ou plus pour l'instant"
+      : `${nb} note${nb > 1 ? "s" : ""} de 15 ou plus`;
 
     const list = $("list");
     list.innerHTML = "";
@@ -185,10 +189,9 @@
     if (isNaN(grade)) { $("preview").textContent = ""; return; }
     if (grade < 0 || grade > 20) { $("preview").textContent = "La note doit être entre 0 et 20."; return; }
     const g = gainPourNote(subject, grade);
-    const premiere = g > 0 && !notes.some(n => n.grade > SEUIL);
     $("preview").textContent = g === 0
       ? "Cette note ne change pas la cagnotte."
-      : `Cette note rapporterait +${fmt(g)}${premiere ? ` (et débloque la base de ${fmt(BASE)})` : ""}.`;
+      : `Cette note rapporterait +${fmt(g)}.`;
   }
 
   $("grade").addEventListener("input", updatePreview);
