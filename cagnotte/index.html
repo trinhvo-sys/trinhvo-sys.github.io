@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ma cagnotte de notes</title>
+<style>
+  :root {
+    --bg: #fdf8f0; --card: #ffffff; --ink: #2b2a33; --muted: #6f6c7a;
+    --accent: #2f7d5b; --accent-soft: #e3f2ea; --warn: #b4492f; --line: #ece6dc;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.5;
+  }
+  main { max-width: 640px; margin: 0 auto; padding: 24px 16px 48px; }
+  h1 { font-size: 1.4rem; margin: 0 0 16px; }
+  .pot {
+    background: var(--accent); color: #fff; border-radius: 20px;
+    padding: 28px 20px; text-align: center; margin-bottom: 20px;
+  }
+  .pot .label { font-size: .95rem; opacity: .85; }
+  .pot .amount { font-size: 3.2rem; font-weight: 700; letter-spacing: -1px; }
+  .pot .sub { font-size: .85rem; opacity: .85; }
+  .card {
+    background: var(--card); border: 1px solid var(--line); border-radius: 16px;
+    padding: 18px; margin-bottom: 20px;
+  }
+  .card h2 { font-size: 1.05rem; margin: 0 0 12px; }
+  form { display: grid; grid-template-columns: 1fr 110px; gap: 10px; }
+  label { font-size: .85rem; color: var(--muted); display: block; margin-bottom: 4px; }
+  select, input {
+    width: 100%; padding: 10px; font-size: 1rem; border: 1px solid var(--line);
+    border-radius: 10px; background: #fff; color: var(--ink);
+  }
+  button {
+    font: inherit; border: none; border-radius: 10px; cursor: pointer;
+  }
+  .add { grid-column: 1 / -1; background: var(--accent); color: #fff; padding: 12px; font-weight: 600; }
+  .add:hover { filter: brightness(1.08); }
+  .preview { grid-column: 1 / -1; font-size: .9rem; color: var(--muted); min-height: 1.4em; }
+  ul { list-style: none; padding: 0; margin: 0; }
+  li {
+    display: flex; align-items: center; gap: 10px; padding: 10px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  li:last-child { border-bottom: none; }
+  .subj { flex: 1; }
+  .subj small { display: block; color: var(--muted); font-size: .8rem; }
+  .grade { font-weight: 600; min-width: 56px; text-align: right; }
+  .gain { min-width: 72px; text-align: right; font-weight: 600; }
+  .gain.pos { color: var(--accent); }
+  .gain.zero { color: var(--muted); font-weight: 400; }
+  .del { background: none; color: var(--muted); font-size: 1.1rem; padding: 4px 8px; }
+  .del:hover { color: var(--warn); }
+  .empty { color: var(--muted); font-size: .9rem; }
+  .rules { font-size: .9rem; color: var(--muted); }
+  .rules li { display: list-item; border: none; padding: 2px 0; }
+  .rules ul { list-style: disc; padding-left: 20px; }
+  .reset { background: none; color: var(--warn); text-decoration: underline; padding: 0; font-size: .9rem; }
+  .row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>🎓 Ma cagnotte de notes</h1>
+
+  <section class="pot" aria-live="polite">
+    <div class="label">Cagnotte</div>
+    <div class="amount" id="amount">0,00 €</div>
+    <div class="sub" id="sub">Aucune note au-dessus de 15 pour l'instant</div>
+  </section>
+
+  <section class="card">
+    <h2>Ajouter une note</h2>
+    <form id="form">
+      <div>
+        <label for="subject">Matière</label>
+        <select id="subject">
+          <option>Mathématiques</option>
+          <option>Français</option>
+          <option>Anglais</option>
+          <option>Histoire-Géographie</option>
+          <option>Sciences (SVT)</option>
+          <option>Physique-Chimie</option>
+          <option>Technologie</option>
+          <option>Langue vivante 2</option>
+          <option>Arts plastiques</option>
+          <option>Musique</option>
+          <option>EPS</option>
+          <option>Autre</option>
+        </select>
+      </div>
+      <div>
+        <label for="grade">Note /20</label>
+        <input id="grade" type="number" min="0" max="20" step="0.25" inputmode="decimal" required placeholder="17">
+      </div>
+      <div class="preview" id="preview"></div>
+      <button class="add" type="submit">Ajouter</button>
+    </form>
+  </section>
+
+  <section class="card">
+    <div class="row">
+      <h2 style="margin:0">Historique</h2>
+      <button class="reset" id="reset" type="button">Tout effacer</button>
+    </div>
+    <ul id="list"></ul>
+  </section>
+
+  <section class="card rules">
+    <h2>Règles</h2>
+    <ul>
+      <li>Dès qu'une note dépasse 15/20, la cagnotte vaut au moins <strong>15 €</strong>.</li>
+      <li>Chaque point au-dessus de 15 ajoute <strong>1 €</strong>.</li>
+      <li>En <strong>mathématiques</strong> et en <strong>français</strong>, chaque point au-dessus de 15 vaut <strong>1,20 €</strong>.</li>
+      <li>Une note de 15 ou moins ne change rien.</li>
+    </ul>
+  </section>
+</main>
+
+<script>
+  const BASE = 15;           // minimum dès qu'une note dépasse 15
+  const SEUIL = 15;          // note à dépasser
+  const BONUS_MATIERES = ["Mathématiques", "Français"];
+  const TAUX_BONUS = 1.20;
+  const TAUX_NORMAL = 1;
+  const KEY = "cagnotte-notes-v1";
+
+  const fmt = n => n.toLocaleString("fr-FR", { style: "currency", currency: "EUR" });
+
+  function gainPourNote(subject, grade) {
+    if (grade <= SEUIL) return 0;
+    const taux = BONUS_MATIERES.includes(subject) ? TAUX_BONUS : TAUX_NORMAL;
+    return Math.round((grade - SEUIL) * taux * 100) / 100;
+  }
+
+  function calculerCagnotte(notes) {
+    const qualifiantes = notes.filter(n => n.grade > SEUIL);
+    if (qualifiantes.length === 0) return 0;
+    const bonus = qualifiantes.reduce((s, n) => s + gainPourNote(n.subject, n.grade), 0);
+    return Math.round((BASE + bonus) * 100) / 100;
+  }
+
+  let notes = [];
+  try { notes = JSON.parse(localStorage.getItem(KEY)) || []; } catch (e) { notes = []; }
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(notes)); } catch (e) {} }
+
+  const $ = id => document.getElementById(id);
+
+  function render() {
+    const total = calculerCagnotte(notes);
+    $("amount").textContent = fmt(total);
+    const nb = notes.filter(n => n.grade > SEUIL).length;
+    $("sub").textContent = nb === 0
+      ? "Aucune note au-dessus de 15 pour l'instant"
+      : `${nb} note${nb > 1 ? "s" : ""} au-dessus de 15 · base ${fmt(BASE)} + ${fmt(total - BASE)} de bonus`;
+
+    const list = $("list");
+    list.innerHTML = "";
+    if (notes.length === 0) {
+      list.innerHTML = '<li class="empty">Aucune note enregistrée.</li>';
+      return;
+    }
+    [...notes].reverse().forEach(n => {
+      const g = gainPourNote(n.subject, n.grade);
+      const li = document.createElement("li");
+      li.innerHTML = `
+        <div class="subj">${n.subject}<small>${new Date(n.date).toLocaleDateString("fr-FR")}</small></div>
+        <div class="grade">${String(n.grade).replace(".", ",")}/20</div>
+        <div class="gain ${g > 0 ? "pos" : "zero"}">${g > 0 ? "+" + fmt(g) : "—"}</div>
+        <button class="del" title="Supprimer" aria-label="Supprimer">✕</button>`;
+      li.querySelector(".del").onclick = () => {
+        notes = notes.filter(x => x.id !== n.id);
+        save(); render();
+      };
+      list.appendChild(li);
+    });
+  }
+
+  function updatePreview() {
+    const grade = parseFloat($("grade").value.replace(",", "."));
+    const subject = $("subject").value;
+    if (isNaN(grade)) { $("preview").textContent = ""; return; }
+    if (grade < 0 || grade > 20) { $("preview").textContent = "La note doit être entre 0 et 20."; return; }
+    const g = gainPourNote(subject, grade);
+    const premiere = g > 0 && !notes.some(n => n.grade > SEUIL);
+    $("preview").textContent = g === 0
+      ? "Cette note ne change pas la cagnotte."
+      : `Cette note rapporterait +${fmt(g)}${premiere ? ` (et débloque la base de ${fmt(BASE)})` : ""}.`;
+  }
+
+  $("grade").addEventListener("input", updatePreview);
+  $("subject").addEventListener("change", updatePreview);
+
+  $("form").addEventListener("submit", e => {
+    e.preventDefault();
+    const grade = parseFloat($("grade").value.replace(",", "."));
+    if (isNaN(grade) || grade < 0 || grade > 20) return;
+    notes.push({ id: Date.now() + Math.random(), subject: $("subject").value, grade, date: new Date().toISOString() });
+    save();
+    $("grade").value = "";
+    $("preview").textContent = "";
+    render();
+  });
+
+  let resetArme = false;
+  $("reset").addEventListener("click", () => {
+    if (notes.length === 0) return;
+    if (!resetArme) {
+      resetArme = true;
+      $("reset").textContent = "Cliquer encore pour confirmer";
+      setTimeout(() => { resetArme = false; $("reset").textContent = "Tout effacer"; }, 3000);
+      return;
+    }
+    resetArme = false;
+    $("reset").textContent = "Tout effacer";
+    notes = [];
+    save(); render();
+  });
+
+  render();
+</script>
+</body>
+</html>
